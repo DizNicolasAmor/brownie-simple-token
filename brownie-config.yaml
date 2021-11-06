@@ -15,5 +15,10 @@ networks:
     verify: True
   mainnet-fork:
     verify: False
+  mumbai_moralis:
+    verify: True
+  polygon-test:
+    verify: True
+
 wallets:
   from_key: ${PRIVATE_KEY}

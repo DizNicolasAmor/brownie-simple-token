@@ -1,6 +1,6 @@
-# brownie-simple-message
+# brownie-simple-token
 
-This is a dApp built with brownie. The user can get a message from the blockchain and update it.
+This is a dApp built with brownie. It is an ERC20 token.
 
 ## Requirements:
 
@@ -41,26 +41,35 @@ $ brownie test -s
 
 ### How to deploy to a testnet
 
-#### Option 1: without verification
+#### Kovan (Ethereum testnet)
 
-Documentation example of the first steps: https://chain.link/bootcamp/brownie-setup-instructions
-
-1. Create an account, for example using MetaMask.
-1. Switch into a testnet.
-1. Fund your account, for example using a Faucet.
+1. Create an account. For example using MetaMask.
+1. Switch into a testnet. For example, kovan.
+1. Fund your account. For example using a Faucet.
 1. Signup in Infura (https://infura.io/) and create a project. Call it "brownie-simple-message".
 1. Inside that project, select the testnet.
 1. Save the `WEB3_INFURA_PROJECT_ID` value in the `.env` file
-1. In **brownie**, you can select the network using the `--network` flag and the network name, for example `kovan`:
+1. With verification (optional, but recommended): in this option you can publish the source code in etherscan and a checkmark will appear in etherscan as a sign of verification.
+   1. Signup in Etherscan (https://etherscan.io/), login and go to API-KEYs section. Then create an API-KEY. You have to set a name, for example "verify_brownie".
+   1. Once you have the API-KEY, copy and paste it in the `.env` file as the `ETHERSCAN_TOKEN` value.
+   1. In `deploy.py` file, inside the `deploy` method, pass `publish_source=True` as the last parameter.
+1. In the console, run: `brownie run scripts/deploy.py --network kovan`
+1. Note: with the contract address you can add the token in Metamask to see it in the UI.
 
-   `brownie run scripts/deploy.py --network kovan`
+#### Mumbai (Polygon testnet)
 
-Then, you will see the transaction hash and the contract. You can also inspect in etherscan.
+Similar considerations than **kovan** (previous section). The differences are that: use `moralis` instead of `infura` (or continue with infura) and add `mumbai` network in your Metamask.
 
-#### Option 2: with verification
+- Guide to set mumbai network in Metamask and other stuff: https://docs.unbound.finance/guides/guide-to-accessing-polygon-testnet-and-how-to-use-unbound-faucet-tokens
+- Polygon faucet: https://faucet.polygon.technology/
 
-In this option you can publish the source code in etherscan and a checkmark will appear in etherscan as a sign of verification.
+If you use infura, run: `brownie run scripts/deploy.py --network polygon-test`
 
-1. Signup in Etherscan (https://etherscan.io/), login and go to API-KEYs section. Then create an API-KEY. You have to set a name, for example "verify_brownie".
-1. Once you have the API-KEY, copy and paste it in the `.env` file as the `ETHERSCAN_TOKEN` value.
-1. In `deploy.py` file, inside the `deploy` method, pass `publish_source=True` as the last parameter.
+Instead, if you use Moralis:
+
+- Create an account in https://moralis.io/
+- Create a server in Polygon network (and other networks if you will use them).
+- Then, go to "Speedy nodes" and copy your mumbai endpoint. Replace the host value in `polygon-mumbai_setting.bash` with the value you just copied.
+- Run `polygon-mumbai_setting.bash` script. This scripts adds a network to brownie.
+- You can confirm the network was added by running: `brownie networks list` and check that `mumbai_moralis` is on that list.
+- Useful link: https://moralis.io/how-to-create-your-own-erc-20-token-in-10-minutes/
