@@ -72,4 +72,15 @@ Instead, if you use Moralis:
 - Then, go to "Speedy nodes" and copy your mumbai endpoint. Replace the host value in `add_mumbai_moralis.bash` file with the value you just copied.
 - In the terminal, run `bash ./scripts/add_mumbai_moralis.bash`: this scripts adds a network to brownie.
 - You can confirm the network was added by running: `brownie networks list` and check that `mumbai_moralis` is on that list.
+- Deploy command: `brownie run scripts/deploy.py --network mumbai_moralis`
 - Useful link: https://moralis.io/how-to-create-your-own-erc-20-token-in-10-minutes/
+
+#### BSC Testnet (Moralis)
+
+Same considerations than Mumbai (previous section)
+
+- Faucet: https://testnet.binance.org/faucet-smart
+- Bash script: `bash ./scripts/add_bsc_testnet_moralis.bash`
+- Explorer: https://testnet.bscscan.com/
+- Add blockchain config to Metamask: search for the Metamask button in explorer page.
+- Deploy command: `brownie run scripts/deploy.py --network bsc_testnet_moralis`
